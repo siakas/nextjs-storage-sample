@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// Next.js で Recoil を使うと `Duplicate atom key "xxx"` というエラーが出てしまうのを
+// next-intercept-stdout を使って回避
+const withInterceptStdout = require('next-intercept-stdout')
 
-module.exports = nextConfig
+module.exports = withInterceptStdout(
+  {
+    reactStrictMode: true,
+  },
+  (text) => (text.includes('Duplicate atom key') ? '' : text)
+)
