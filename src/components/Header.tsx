@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import Link from 'next/link'
-import { Sun } from 'react-feather'
+import ToggleThemeButton from '@/components/ToggleThemeButton'
 
 const Header: FC = () => {
   return (
@@ -15,9 +15,7 @@ const Header: FC = () => {
             <Link href="/mylist">マイリスト</Link>
           </li>
         </ul>
-        <button className="ml-auto rounded-md p-1">
-          <Sun />
-        </button>
+        <ToggleThemeButton />
       </div>
     </header>
   )
