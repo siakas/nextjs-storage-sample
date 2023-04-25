@@ -1,62 +1,72 @@
+'use client'
+
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
+import requestUrl from '@/utils/requests'
 import Header from '@/components/Header'
-import Heading from '@/components/Heading'
-import MovieItem from '@/components/MovieItem'
+import Loading from '@/components/Loading'
+import MovieList from '@/components/MovieList'
 
 const Home: NextPage = () => {
+  const [movie, setMovie] = useState({
+    trending: [],
+    topRated: [],
+    actionMovies: [],
+    comedyMovies: [],
+  })
+  const [isLoading, setIsLoading] = useState(true)
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true)
+
+      const [trending, topRated, actionMovies, comedyMovies] =
+        await Promise.all([
+          fetch(requestUrl.trending).then(async (res) => await res.json()),
+          fetch(requestUrl.topRated).then(async (res) => await res.json()),
+          fetch(requestUrl.actionMovies).then(async (res) => await res.json()),
+          fetch(requestUrl.comedyMovies).then(async (res) => await res.json()),
+        ])
+
+      setMovie((prev) => ({
+        ...prev,
+        trending: trending.results,
+        topRated: topRated.results,
+        actionMovies: actionMovies.results,
+        comedyMovies: comedyMovies.results,
+      }))
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 2000)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    void fetchData()
+  }, [])
+
   return (
-    <div className="min-h-screen bg-zinc-900 pb-5 text-white">
-      <div className="m-auto w-[1000px]">
-        {/* ヘッダ */}
-        <Header />
+    <>
+      {/* ヘッダ */}
+      <Header />
 
-        {/* メインコンテンツ */}
-        <div className="mt-6">
-          <Heading>アクション</Heading>
-          <div className="mb-16 grid grid-cols-5 gap-x-2 gap-y-8">
-            <MovieItem title="ドライブ・マイ・カー" />
-            <MovieItem title="孤狼の血" />
-            <MovieItem title="フリーガイ" />
-            <MovieItem title="浅草キッド" />
-            <MovieItem title="RRR" />
-            <MovieItem title="エブリシング・エブリウェア・オール・アット・ワンス" />
-            <MovieItem title="ヘレディタリー／継承" />
-          </div>
+      <Loading isLoading={isLoading} />
 
-          <Heading>コメディ</Heading>
-          <div className="mb-16 grid grid-cols-5 gap-x-2 gap-y-8">
-            <MovieItem title="ドライブ・マイ・カー" />
-            <MovieItem title="孤狼の血" />
-            <MovieItem title="フリーガイ" />
-            <MovieItem title="浅草キッド" />
-            <MovieItem title="RRR" />
-            <MovieItem title="エブリシング・エブリウェア・オール・アット・ワンス" />
-            <MovieItem title="ヘレディタリー／継承" />
-          </div>
-
-          <Heading>ホラー</Heading>
-          <div className="mb-16 grid grid-cols-5 gap-x-2 gap-y-8">
-            <MovieItem title="ドライブ・マイ・カー" />
-            <MovieItem title="孤狼の血" />
-            <MovieItem title="フリーガイ" />
-          </div>
-
-          <Heading>恋愛</Heading>
-          <div className="mb-16 grid grid-cols-5 gap-x-2 gap-y-8">
-            <MovieItem title="ドライブ・マイ・カー" />
-            <MovieItem title="孤狼の血" />
-            <MovieItem title="フリーガイ" />
-          </div>
-
-          <Heading>ドキュメンタリー</Heading>
-          <div className="mb-16 grid grid-cols-5 gap-x-2 gap-y-8">
-            <MovieItem title="ドライブ・マイ・カー" />
-            <MovieItem title="孤狼の血" />
-            <MovieItem title="フリーガイ" />
-          </div>
-        </div>
+      {/* メインコンテンツ */}
+      <div className="mt-6">
+        {movie !== undefined && (
+          <>
+            <MovieList movies={movie.trending} title="人気の映画" />
+            <MovieList movies={movie.topRated} title="評価の高い映画" />
+            <MovieList movies={movie.actionMovies} title="アクション" />
+            <MovieList movies={movie.comedyMovies} title="コメディ" />
+          </>
+        )}
       </div>
-    </div>
+    </>
   )
 }
 
