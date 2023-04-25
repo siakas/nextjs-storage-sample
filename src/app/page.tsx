@@ -4,6 +4,7 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import requestUrl from '@/utils/requests'
 import Header from '@/components/Header'
+import Loading from '@/components/Loading'
 import MovieList from '@/components/MovieList'
 
 const Home: NextPage = () => {
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
         setIsLoading(false)
       }, 2000)
     } catch (error) {
-      console.log('🚀 ~ file: page.tsx:28 ~ fetchData ~ error:', error)
+      console.log(error)
     }
   }
 
@@ -51,6 +52,8 @@ const Home: NextPage = () => {
     <>
       {/* ヘッダ */}
       <Header />
+
+      <Loading isLoading={isLoading} />
 
       {/* メインコンテンツ */}
       <div className="mt-6">
