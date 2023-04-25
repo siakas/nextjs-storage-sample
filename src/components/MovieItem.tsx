@@ -1,5 +1,3 @@
-'use client'
-
 import type { FC } from 'react'
 import type { Movie } from '@/types/movies'
 import Image from 'next/image'
