@@ -1,8 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-}
+const withInterceptStdout = require('next-intercept-stdout')
 
-module.exports = nextConfig
+module.exports = withInterceptStdout(
+  {
+    reactStrictMode: true,
+    images: {
+      domains: ['image.tmdb.org'],
+    },
+  },
+  (text) => (text.includes('Duplicate atom key') ? '' : text)
+)

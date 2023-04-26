@@ -1,24 +1,33 @@
 import type { FC } from 'react'
-import { Plus } from 'react-feather'
+import type { Movie } from '@/types/movies'
+import ToggleMylistButton from '@/components/ToggleMylistButton'
 
 type MovieItemProps = {
-  title: string
+  movie: Movie
 }
 
-const MovieItem: FC<MovieItemProps> = ({ title }) => {
+const MovieItem: FC<MovieItemProps> = ({ movie }) => {
   return (
     <div data-box="griditem">
       <div className="relative">
         <img
-          src="https://placehold.jp/600x600.png"
-          className="block aspect-[2/3] w-full rounded-[3px] object-cover"
-          alt=""
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie?.title ?? movie?.name ?? ''}
+          className="block aspect-[2/3] w-full rounded-md object-cover"
+          loading="lazy"
         />
-        <button className="absolute bottom-[6px] right-[6px] rounded-full bg-gray-600 bg-opacity-30 p-2 shadow-lg">
-          <Plus />
-        </button>
+        <ToggleMylistButton movie={movie} />
       </div>
-      <p className="p-2 text-sm font-bold leading-normal">{title}</p>
+      <p className="p-2 text-sm font-bold leading-normal">
+        {movie?.title ?? movie?.name ?? ''}
+      </p>
+      {/* <p className="text-xs">
+        人気指数：{movie.popularity}
+        <br />
+        評価レート：{movie.vote_average}
+        <br />
+        票数：{movie.vote_count}
+      </p> */}
     </div>
   )
 }
