@@ -1,10 +1,14 @@
 import type { NextPage } from 'next'
-import Heading from '@/components/Heading'
+import { useRecoilValue } from 'recoil'
+import { mylistState } from '@/state/atom'
+import MovieList from '@/components/MovieList'
 
 const MylistPage: NextPage = () => {
+  const mylist = useRecoilValue(mylistState)
+
   return (
     <div className="mt-6">
-      <Heading>マイリスト</Heading>
+      <MovieList movies={mylist} title="マイリスト" />
     </div>
   )
 }

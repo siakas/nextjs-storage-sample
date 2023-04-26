@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { Movie } from '@/types/movies'
 import Image from 'next/image'
-import { Plus } from 'react-feather'
+import ToggleMylistButton from '@/components/ToggleMylistButton'
 
 type MovieItemProps = {
   movie: Movie
@@ -19,9 +19,7 @@ const MovieItem: FC<MovieItemProps> = ({ movie }) => {
           height={500}
           loading="lazy"
         />
-        <button className="absolute bottom-[6px] right-[6px] rounded-full bg-gray-900 bg-opacity-80 p-2 shadow-lg">
-          <Plus />
-        </button>
+        <ToggleMylistButton movie={movie} />
       </div>
       <p className="p-2 text-sm font-bold leading-normal">
         {movie?.title ?? movie?.name ?? ''}
