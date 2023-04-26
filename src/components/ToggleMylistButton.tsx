@@ -9,7 +9,7 @@ type ToggleMylistButtonProps = {
 }
 
 const ToggleMylistButton: FC<ToggleMylistButtonProps> = ({ movie }) => {
-  const [mylist, setMylist] = useRecoilState(mylistState)
+  const [mylist, setMylist] = useRecoilState<Movie[]>(mylistState)
 
   // ボタンが受け取った movie が mylist にすでに存在するかどうかを判定
   const isMovieInMylist = mylist.some((item) => item.id === movie.id)
@@ -29,7 +29,7 @@ const ToggleMylistButton: FC<ToggleMylistButtonProps> = ({ movie }) => {
 
   return (
     <button
-      className="absolute bottom-[6px] right-[6px] rounded-full bg-gray-900 bg-opacity-80 p-2 shadow-lg"
+      className="absolute bottom-[6px] right-[6px] rounded-full bg-gray-100 bg-opacity-60 p-2 shadow-lg dark:bg-gray-900 dark:bg-opacity-80"
       onClick={handleClick}
     >
       {isMovieInMylist ? <Check /> : <Plus />}

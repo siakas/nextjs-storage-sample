@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import type { Movie } from '@/types/movies'
-import Image from 'next/image'
 import ToggleMylistButton from '@/components/ToggleMylistButton'
 
 type MovieItemProps = {
@@ -11,12 +10,10 @@ const MovieItem: FC<MovieItemProps> = ({ movie }) => {
   return (
     <div data-box="griditem">
       <div className="relative">
-        <Image
+        <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie?.title ?? movie?.name ?? ''}
           className="block aspect-[2/3] w-full rounded-md object-cover"
-          width={500}
-          height={500}
           loading="lazy"
         />
         <ToggleMylistButton movie={movie} />
