@@ -16,7 +16,7 @@ const MylistPage: NextPage = () => {
         {mylist.length !== 0 ? (
           <MovieList movies={mylist} title="マイリスト" />
         ) : (
-          <p className="text-2xl">マイリストに追加された作品はまだありません</p>
+          <p className="text-2xl">マイリストに追加された作品はありません</p>
         )}
       </div>
     </>
