@@ -1,7 +1,9 @@
 import type { NextPage } from 'next'
 import type { Movie } from '@/types/movies'
 import { useState, useEffect } from 'react'
+import { useLoading } from '@/hooks/useLoading'
 import { getContents } from '@/utils/getContents'
+import Loading from '@/components/Loading'
 import MovieList from '@/components/MovieList'
 
 const Home: NextPage = () => {
@@ -9,6 +11,8 @@ const Home: NextPage = () => {
   const [topRated, setTopRated] = useState<Movie[]>([])
   const [actionMovies, setActionMovies] = useState<Movie[]>([])
   const [comedyMovies, setComedyMovies] = useState<Movie[]>([])
+
+  const isLoading = useLoading()
 
   useEffect(() => {
     const fetchContents = async () => {
@@ -29,12 +33,15 @@ const Home: NextPage = () => {
   }, [])
 
   return (
-    <div className="mt-6">
-      <MovieList movies={trending} title="人気の映画" />
-      <MovieList movies={topRated} title="評価の高い映画" />
-      <MovieList movies={actionMovies} title="アクション" />
-      <MovieList movies={comedyMovies} title="コメディ" />
-    </div>
+    <>
+      <Loading isLoading={isLoading} />
+      <div className="mt-6">
+        <MovieList movies={trending} title="人気の映画" />
+        <MovieList movies={topRated} title="評価の高い映画" />
+        <MovieList movies={actionMovies} title="アクション" />
+        <MovieList movies={comedyMovies} title="コメディ" />
+      </div>
+    </>
   )
 }
 
