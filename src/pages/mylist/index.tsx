@@ -13,7 +13,11 @@ const MylistPage: NextPage = () => {
     <>
       <Loading isLoading={isLoading} />
       <div className="mt-6">
-        <MovieList movies={mylist} title="マイリスト" />
+        {mylist.length !== 0 ? (
+          <MovieList movies={mylist} title="マイリスト" />
+        ) : (
+          <p className="text-2xl">マイリストに追加された作品はまだありません</p>
+        )}
       </div>
     </>
   )
