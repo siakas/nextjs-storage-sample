@@ -21,6 +21,13 @@ const MovieItem: FC<MovieItemProps> = ({ movie }) => {
       <p className="p-2 text-sm font-bold leading-normal">
         {movie?.title ?? movie?.name ?? ''}
       </p>
+      {/* <p className="text-xs">
+        人気指数：{movie.popularity}
+        <br />
+        評価レート：{movie.vote_average}
+        <br />
+        票数：{movie.vote_count}
+      </p> */}
     </div>
   )
 }

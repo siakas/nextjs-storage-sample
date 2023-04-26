@@ -12,3 +12,8 @@ export const mylistState = atom({
   default: [] as Movie[],
   effects_UNSTABLE: [persistAtom],
 })
+
+export const sortState = atom({
+  key: 'sortState',
+  default: 'default',
+})
