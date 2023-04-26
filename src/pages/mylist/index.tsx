@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
-import { useRecoilValue } from 'recoil'
+import { useClientSideRecoilValue } from '@/hooks/useClientSideRecoilValue'
 import { mylistState } from '@/state/atom'
 import MovieList from '@/components/MovieList'
 
 const MylistPage: NextPage = () => {
-  const mylist = useRecoilValue(mylistState)
+  const mylist = useClientSideRecoilValue(mylistState, [])
 
   return (
     <div className="mt-6">

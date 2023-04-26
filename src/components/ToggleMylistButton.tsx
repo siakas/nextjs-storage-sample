@@ -9,7 +9,7 @@ type ToggleMylistButtonProps = {
 }
 
 const ToggleMylistButton: FC<ToggleMylistButtonProps> = ({ movie }) => {
-  const [mylist, setMylist] = useRecoilState(mylistState)
+  const [mylist, setMylist] = useRecoilState<Movie[]>(mylistState)
 
   // ボタンが受け取った movie が mylist にすでに存在するかどうかを判定
   const isMovieInMylist = mylist.some((item) => item.id === movie.id)
