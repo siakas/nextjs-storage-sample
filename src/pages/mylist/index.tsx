@@ -44,10 +44,10 @@ const MylistPage: NextPage = () => {
             onChange={handleSortChange}
             className="cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           >
-            <option value="default">追加順</option>
-            <option value="popularity">勢い順</option>
-            <option value="vote_average">評価順</option>
-            <option value="vote_count">得票数順</option>
+            <option value="default">マイリストへの追加順</option>
+            <option value="popularity">話題の勢い順</option>
+            <option value="vote_average">評価の高い順</option>
+            <option value="vote_count">得票数の多い順</option>
           </select>
         </div>
 
